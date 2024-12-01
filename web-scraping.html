@@ -7516,9 +7516,196 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Web-Mining-and-Applied-NLP-(44-620)">Web Mining and Applied NLP (44-620)<a class="anchor-link" href="#Web-Mining-and-Applied-NLP-(44-620)">¶</a></h1><h2 id="Web-Scraping-and-NLP-with-Requests,-BeautifulSoup,-and-spaCy">Web Scraping and NLP with Requests, BeautifulSoup, and spaCy<a class="anchor-link" href="#Web-Scraping-and-NLP-with-Requests,-BeautifulSoup,-and-spaCy">¶</a></h2><h3 id="Student-Name:-Mindy-Cruz">Student Name: Mindy Cruz<a class="anchor-link" href="#Student-Name:-Mindy-Cruz">¶</a></h3><p><a href="">Link to Repo</a></p>
+<h1 id="Web-Mining-and-Applied-NLP-(44-620)">Web Mining and Applied NLP (44-620)<a class="anchor-link" href="#Web-Mining-and-Applied-NLP-(44-620)">¶</a></h1><h2 id="Web-Scraping-and-NLP-with-Requests,-BeautifulSoup,-and-spaCy">Web Scraping and NLP with Requests, BeautifulSoup, and spaCy<a class="anchor-link" href="#Web-Scraping-and-NLP-with-Requests,-BeautifulSoup,-and-spaCy">¶</a></h2><h3 id="Student-Name:-Mindy-Cruz">Student Name: Mindy Cruz<a class="anchor-link" href="#Student-Name:-Mindy-Cruz">¶</a></h3><p><a href="https://github.com/mindy0cruz/Mod-6-web-scraping">Link to Repo</a></p>
 <p>Perform the tasks described in the Markdown cells below.  When you have completed the assignment make sure your code cells have all been run (and have output beneath them) and ensure you have committed and pushed ALL of your changes to your assignment repository.</p>
 <p>Every question that requires you to write code will have a code cell underneath it; you may either write your entire solution in that cell or write it in a python file (<code>.py</code>), then import and run the appropriate code to answer the question.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">spacy</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="o">!</span>pip<span class="w"> </span>list
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'All prereqs installed.'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Package                   Version
+------------------------- --------------
+annotated-types           0.7.0
+anyio                     4.3.0
+argon2-cffi               23.1.0
+argon2-cffi-bindings      21.2.0
+arrow                     1.3.0
+asttokens                 2.4.1
+async-lru                 2.0.4
+attrs                     23.2.0
+Babel                     2.15.0
+beautifulsoup4            4.12.3
+bleach                    6.1.0
+blis                      1.0.1
+catalogue                 2.0.10
+certifi                   2024.2.2
+cffi                      1.16.0
+charset-normalizer        3.3.2
+click                     8.1.7
+cloudpathlib              0.20.0
+colorama                  0.4.6
+comm                      0.2.2
+confection                0.1.5
+contourpy                 1.2.1
+cycler                    0.12.1
+cymem                     2.0.8
+debugpy                   1.8.1
+decorator                 5.1.1
+defusedxml                0.7.1
+en_core_web_sm            3.8.0
+executing                 2.0.1
+fastjsonschema            2.19.1
+fonttools                 4.53.0
+fqdn                      1.5.1
+h11                       0.14.0
+httpcore                  1.0.5
+httpx                     0.27.0
+idna                      3.7
+ipykernel                 6.29.4
+ipython                   8.24.0
+ipywidgets                8.1.2
+isoduration               20.11.0
+jedi                      0.19.1
+Jinja2                    3.1.4
+joblib                    1.4.2
+json5                     0.9.25
+jsonpointer               2.4
+jsonschema                4.22.0
+jsonschema-specifications 2023.12.1
+jupyter                   1.0.0
+jupyter_client            8.6.2
+jupyter-console           6.6.3
+jupyter_core              5.7.2
+jupyter-events            0.10.0
+jupyter-lsp               2.2.5
+jupyter_server            2.14.0
+jupyter_server_terminals  0.5.3
+jupyterlab                4.2.1
+jupyterlab_pygments       0.3.0
+jupyterlab_server         2.27.2
+jupyterlab_widgets        3.0.10
+kiwisolver                1.4.5
+langcodes                 3.4.1
+language_data             1.2.0
+lyricsgenius              3.0.1
+marisa-trie               1.2.1
+markdown-it-py            3.0.0
+MarkupSafe                2.1.5
+matplotlib                3.9.0
+matplotlib-inline         0.1.7
+mdurl                     0.1.2
+mistune                   3.0.2
+murmurhash                1.0.10
+nbclient                  0.10.0
+nbconvert                 7.16.4
+nbformat                  5.10.4
+nest-asyncio              1.6.0
+nltk                      3.9.1
+notebook                  7.2.0
+notebook_shim             0.2.4
+numpy                     2.0.2
+overrides                 7.7.0
+packaging                 24.0
+pandas                    2.2.2
+pandocfilters             1.5.1
+parso                     0.8.4
+pillow                    10.3.0
+pip                       24.3.1
+platformdirs              4.2.2
+preshed                   3.0.9
+prometheus_client         0.20.0
+prompt-toolkit            3.0.43
+psutil                    5.9.8
+pure-eval                 0.2.2
+pyarrow                   16.1.0
+pycparser                 2.22
+pydantic                  2.9.2
+pydantic_core             2.23.4
+Pygments                  2.18.0
+pyparsing                 3.1.2
+python-dateutil           2.9.0.post0
+python-json-logger        2.0.7
+pytz                      2024.1
+pywin32                   306
+pywinpty                  2.0.13
+PyYAML                    6.0.1
+pyzmq                     26.0.3
+qtconsole                 5.5.2
+QtPy                      2.4.1
+referencing               0.35.1
+regex                     2024.11.6
+requests                  2.31.0
+rfc3339-validator         0.1.4
+rfc3986-validator         0.1.1
+rich                      13.9.4
+rpds-py                   0.18.1
+seaborn                   0.13.2
+Send2Trash                1.8.3
+setuptools                75.4.0
+shellingham               1.5.4
+six                       1.16.0
+smart-open                7.0.5
+sniffio                   1.3.1
+soupsieve                 2.5
+spacy                     3.8.2
+spacy-legacy              3.0.12
+spacy-loggers             1.0.5
+spacytextblob             5.0.0
+srsly                     2.4.8
+stack-data                0.6.3
+terminado                 0.18.1
+textblob                  0.18.0.post0
+thinc                     8.3.2
+tinycss2                  1.3.0
+tornado                   6.4
+tqdm                      4.67.0
+traitlets                 5.14.3
+typer                     0.13.0
+types-python-dateutil     2.9.0.20240316
+typing_extensions         4.12.2
+tzdata                    2024.1
+uri-template              1.3.0
+urllib3                   2.2.1
+wasabi                    1.1.3
+wcwidth                   0.2.13
+weasel                    0.4.1
+webcolors                 1.13
+webencodings              0.5.1
+websocket-client          1.8.0
+widgetsnbextension        4.0.10
+wrapt                     1.16.0
+All prereqs installed.
+</pre>
+</div>
 </div>
 </div>
 </div>
@@ -7551,10 +7738,10 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [73]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># URL </span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># URL</span>
 <span class="n">url</span> <span class="o">=</span> <span class="s2">"https://web.archive.org/web/20210327165005/https://hackaday.com/2021/03/22/how-laser-headlights-work/"</span>
 
 <span class="c1"># Fetch Content</span>
@@ -7568,13 +7755,12 @@ a.anchor-link {
     <span class="c1"># Fetch Article</span>
     <span class="n">article</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'article'</span><span class="p">)</span>
     
-    
-<span class="c1"># Serialize the article HTML to a .pkl file</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'article.pkl'</span><span class="p">,</span> <span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="c1"># Serialize the article HTML to a .pkl file</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'article.pkl'</span><span class="p">,</span> <span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
         <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">article</span><span class="p">),</span> <span class="n">file</span><span class="p">)</span>
 
-<span class="c1"># Print        </span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Article saved to article.pkl"</span><span class="p">)</span>
+    <span class="c1"># Print success message</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Article saved to article.pkl"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7622,7 +7808,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [74]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Load the article</span>
@@ -7747,7 +7933,7 @@ Posted in car hacks, Engineering, Featured, Laser Hacks, SliderTagged laser, las
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [75]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
@@ -7763,6 +7949,7 @@ Posted in car hacks, Engineering, Featured, Laser Hacks, SliderTagged laser, las
 
 <span class="c1"># Extract Article</span>
 <span class="n">article_text</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
+
 
 <span class="c1"># Filter out stopwords, punctuation, and whitespace</span>
 <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">token</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">token</span><span class="o">.</span><span class="n">is_stop</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">token</span><span class="o">.</span><span class="n">is_punct</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">token</span><span class="o">.</span><span class="n">is_space</span><span class="p">]</span>
@@ -7829,7 +8016,7 @@ Token: led - Frequency: 10
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [76]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [22]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Filter out stopwords, punctuation, and whitespace </span>
@@ -7902,7 +8089,7 @@ Lemma: led, Frequency: 10
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [77]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [23]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Method to score sentence by token</span>
@@ -7991,7 +8178,7 @@ Score Lemma:  0.150
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [78]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [24]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># for histogram</span>
@@ -8067,7 +8254,7 @@ Score Lemma:  0.150
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [79]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [25]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># for histogram</span>
@@ -8132,6 +8319,9 @@ Score Lemma:  0.150
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ol start="8">
+<li>Which tokens and lexems would be ommitted from the lists generated in questions 3 and 4 if we only wanted to consider nouns as interesting words?  How might we change the code to only consider nouns? Put your answer in this Markdown cell (you can edit it by double clicking it).</li>
+</ol>
 </div>
 </div>
 </div>
@@ -8142,9 +8332,138 @@ Score Lemma:  0.150
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<ol start="8">
-<li>Which tokens and lexems would be ommitted from the lists generated in questions 3 and 4 if we only wanted to consider nouns as interesting words?  How might we change the code to only consider nouns? Put your answer in this Markdown cell (you can edit it by double clicking it).</li>
-</ol>
+<h1 id="Question-8"><em>Question 8</em><a class="anchor-link" href="#Question-8">¶</a></h1>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>If we only wanted to consider nouns as interesting words, verbs and adjectives would be ommited.</p>
+<p>For Tokens:
+tokens = [token.text.lower() for token in doc if (token.pos_ in ['NOUN']) and not token.is_stop and not token.is_punct and not token.is_space]</p>
+<p>For Lemmas:
+lemmas = [token.lemma_.lower() for token in doc if (token.pos_ in ['NOUN']) and not token.is_stop and not token.is_punct and not token.is_space]</p>
+<p>Below I ran the code to see if they did what was expected and I believe the results are correct.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [26]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># For Tokens- filter nouns</span>
+<span class="n">nouns</span><span class="o">=</span> <span class="p">[</span><span class="n">token</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span> <span class="k">if</span> <span class="p">(</span><span class="n">token</span><span class="o">.</span><span class="n">pos_</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'NOUN'</span><span class="p">])</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">token</span><span class="o">.</span><span class="n">is_stop</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">token</span><span class="o">.</span><span class="n">is_punct</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">token</span><span class="o">.</span><span class="n">is_space</span><span class="p">]</span>
+
+<span class="c1"># Count</span>
+<span class="n">noun_count</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">nouns</span><span class="p">)</span>
+
+<span class="c1"># Top 5 </span>
+<span class="n">most_frequent_noun</span> <span class="o">=</span> <span class="n">noun_count</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1">#Print</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Token-Top 5 Nouns:"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">noun</span><span class="p">,</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">most_frequent_noun</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Noun: </span><span class="si">{</span><span class="n">noun</span><span class="si">}</span><span class="s2">, Frequency: </span><span class="si">{</span><span class="n">freq</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Token-Top 5 Nouns:
+Noun: laser, Frequency: 29
+Noun: headlights, Frequency: 17
+Noun: technology, Frequency: 10
+Noun: headlight, Frequency: 9
+Noun: beam, Frequency: 7
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [27]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># For Lemmas- filter nouns</span>
+<span class="n">nouns</span><span class="o">=</span> <span class="p">[</span><span class="n">token</span><span class="o">.</span><span class="n">lemma_</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span> <span class="k">if</span> <span class="p">(</span><span class="n">token</span><span class="o">.</span><span class="n">pos_</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'NOUN'</span><span class="p">])</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">token</span><span class="o">.</span><span class="n">is_stop</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">token</span><span class="o">.</span><span class="n">is_punct</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">token</span><span class="o">.</span><span class="n">is_space</span><span class="p">]</span>
+
+<span class="c1"># Count</span>
+<span class="n">noun_count</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">nouns</span><span class="p">)</span>
+
+<span class="c1"># Top 5 </span>
+<span class="n">most_frequent_noun</span> <span class="o">=</span> <span class="n">noun_count</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1">#Print</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Lemmas-Top 5 Nouns:"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">noun</span><span class="p">,</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">most_frequent_noun</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Noun: </span><span class="si">{</span><span class="n">noun</span><span class="si">}</span><span class="s2">, Frequency: </span><span class="si">{</span><span class="n">freq</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Lemmas-Top 5 Nouns:
+Noun: laser, Frequency: 34
+Noun: headlight, Frequency: 26
+Noun: beam, Frequency: 12
+Noun: technology, Frequency: 10
+Noun: led, Frequency: 8
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [28]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">'jupyter nbconvert --to html web-scraping.ipynb'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[28]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>0</pre>
+</div>
 </div>
 </div>
 </div>
